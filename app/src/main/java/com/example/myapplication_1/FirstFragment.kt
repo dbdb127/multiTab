@@ -1,7 +1,6 @@
   package com.example.myapplication_1
 
 import android.database.Cursor
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.view.LayoutInflater
@@ -11,7 +10,7 @@ import android.widget.ListView
 import android.widget.SimpleCursorAdapter
 import androidx.fragment.app.Fragment
 
-class FirstFragment : Fragment() {
+  class FirstFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -1,17 +1,12 @@
 package com.example.myapplication_1
 
-import android.app.Activity
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.graphics.Camera
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -40,16 +35,6 @@ class SecondFragment : Fragment() {
 
         imageRecycler?.layoutManager=GridLayoutManager(activity,3)
         imageRecycler?.setHasFixedSize(true)
-
-        //Storage Permissions
-        if(ContextCompat.checkSelfPermission(
-                requireContext(),
-                android.Manifest.permission.READ_EXTERNAL_STORAGE
-            )!=PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(
-                requireContext() as Activity,
-            arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),101)
-        }
 
         allPictures= ArrayList()
 
