@@ -34,12 +34,4 @@ class FirstFragment : Fragment() {
         val listview = view?.findViewById(R.id.listView) as ListView
         listview.setAdapter(simple)
     }
-
-
-    fun newInstant():FirstFragment{
-        val args = Bundle()
-        val frag = FirstFragment()
-        frag.arguments = args
-        return frag
-    }
 }

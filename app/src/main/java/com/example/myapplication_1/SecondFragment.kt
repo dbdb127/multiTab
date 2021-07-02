@@ -2,7 +2,6 @@ package com.example.myapplication_1
 
 import android.app.Activity
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
@@ -86,12 +85,5 @@ class SecondFragment : Fragment() {
             e.printStackTrace()
         }
         return images
-    }
-
-    fun newInstant():SecondFragment{
-        val args = Bundle()
-        val frag = SecondFragment()
-        frag.arguments = args
-        return frag
     }
 }
