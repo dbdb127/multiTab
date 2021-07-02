@@ -1,7 +1,9 @@
 package com.example.myapplication_1
 
 import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Camera
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
@@ -60,6 +62,14 @@ class SecondFragment : Fragment() {
             //Set Adapter to recycler
             imageRecycler?.adapter=ImageAdapter(requireContext(),allPictures!!)
             progressBar?.visibility= View.GONE
+        }
+
+        val fab: View = view.findViewById(R.id.fab)
+        fab.setOnClickListener {
+            requireActivity().let{
+                val intent = Intent(activity, CameraActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 
