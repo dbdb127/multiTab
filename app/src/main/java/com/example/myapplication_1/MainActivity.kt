@@ -18,7 +18,9 @@ class MainActivity : AppCompatActivity() {
         //permission
         val requiredPermissions = arrayOf(
             Manifest.permission.READ_CONTACTS,
-            Manifest.permission.READ_EXTERNAL_STORAGE
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
         )
 
         var rejectedPermissionList = ArrayList<String>()
