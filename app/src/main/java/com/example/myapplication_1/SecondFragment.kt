@@ -1,11 +1,15 @@
 package com.example.myapplication_1
 
+import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -52,9 +56,32 @@ class SecondFragment : Fragment() {
         val fab: View = view.findViewById(R.id.fab)
         fab.setOnClickListener {
             requireActivity().let{
-                val intent = Intent(activity, CameraActivity::class.java)
-                startActivity(intent)
+                val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                startActivityForResult(intent, 101)
             }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        imageRecycler= view?.findViewById(R.id.image_recycler)
+        progressBar=view?.findViewById(R.id.recycler_progress)
+
+        imageRecycler?.layoutManager=GridLayoutManager(activity,3)
+        imageRecycler?.setHasFixedSize(true)
+
+        allPictures= ArrayList()
+
+        if(allPictures!!.isEmpty()){
+            progressBar?.visibility=View.VISIBLE
+
+            //get ALL Images From Storage
+            allPictures=getAllImages()
+
+            //Set Adapter to recycler
+            imageRecycler?.adapter=ImageAdapter(requireContext(),allPictures!!)
+            progressBar?.visibility= View.GONE
         }
     }
 
