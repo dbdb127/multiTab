@@ -1,50 +1,36 @@
 package com.example.myapplication_1
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.location.Location
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
 import android.os.Looper
 import android.util.Log
-import android.widget.Toast
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-
+import androidx.fragment.app.Fragment
+import com.example.myapplication_1.databinding.ActivityMapsBinding
+import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.example.myapplication_1.databinding.ActivityMapsBinding
-import com.google.android.gms.location.*
-import com.google.android.gms.location.R
-import com.google.android.gms.maps.model.CameraPosition
-import androidx.core.content.PermissionChecker.PERMISSION_GRANTED as PERMISSION_GRANTED1
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ThirdFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 
 class ThirdFragment : Fragment(), OnMapReadyCallback {
     // TODO: Rename and change types of parameters
 
-    val permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
-    val PERM_FLAG = 99
+    private val permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
+    private val PERM_FLAG = 99
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityMapsBinding
@@ -59,7 +45,7 @@ class ThirdFragment : Fragment(), OnMapReadyCallback {
             startProcess()
         }
         else {
-            ActivityCompat.requestPermissions(context!! as Activity, permissions, PERM_FLAG)
+            ActivityCompat.requestPermissions(requireContext() as Activity, permissions, PERM_FLAG)
         }
 
         binding = ActivityMapsBinding.inflate(layoutInflater)
@@ -67,7 +53,7 @@ class ThirdFragment : Fragment(), OnMapReadyCallback {
 
 //        return binding.root
 //        return (binding.root)
-        return inflater.inflate(com.example.myapplication_1.R.layout.fragment_third, container, false)
+        return inflater.inflate(R.layout.fragment_third, container, false)
     }
 
     fun isPermitted() : Boolean {
@@ -82,18 +68,26 @@ class ThirdFragment : Fragment(), OnMapReadyCallback {
 
     fun startProcess(){
 //      val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-        val mapFragment = childFragmentManager?.findFragmentById(R.id.map) as SupportMapFragment
-//        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+//        val mapFragment = getChildFragmentManager()?.findFragmentById(R.id.map) as SupportMapFragment
+//        mapFragment.getMapAsync(this)
+
 
         // GET MAP ASYNC, 안드로이드에게 위치 정보 요청
-        mapFragment.getMapAsync(this)
+//        getSupportFragmentManager().findFragmentById(R.id.map).getMapAsync(this)
+
+//        val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+//        mapFragment.getMapAsync(this)
+        (activity?.supportFragmentManager?.findFragmentById(R.id.map) as SupportMapFragment?)?.let {
+            it.getMapAsync(this)
+        }
+//        mapFragment.getMapAsync(this)
     }
 
     override fun onMapReady(googleMap: GoogleMap?) {
         if (googleMap != null) {
             mMap = googleMap
         }
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(context!!)
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
         setupdateLocationListener()
     }
     lateinit var fusedLocationClient: FusedLocationProviderClient
