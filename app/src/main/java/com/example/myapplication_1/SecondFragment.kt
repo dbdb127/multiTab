@@ -17,6 +17,7 @@ import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.io.File
@@ -24,6 +25,7 @@ import java.io.IOException
 import java.lang.Exception
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.properties.Delegates
 
 class SecondFragment : Fragment() {
 
@@ -46,37 +48,22 @@ class SecondFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Gallery()
-
-//        //get all images
-//        imageRecycler= view.findViewById(R.id.image_recycler)
-//        progressBar=view.findViewById(R.id.recycler_progress)
-//
-//        imageRecycler?.layoutManager=GridLayoutManager(activity,3)
-//        imageRecycler?.setHasFixedSize(true)
-//
-//        allPictures= ArrayList()
-//
-//        if(allPictures!!.isEmpty()){
-//            progressBar?.visibility=View.VISIBLE
-//
-//            //get ALL Images From Storage
-//            allPictures=getAllImages()
-//
-//            //Set Adapter to recycler
-//            imageRecycler?.adapter=ImageAdapter(requireContext(),allPictures!!)
-//            progressBar?.visibility= View.GONE
-//        }
+        bringGallery()
 
         //open camera
         val fab: View = view.findViewById(R.id.fab)
         fab.setOnClickListener {
             takePictureIntent()
-            Gallery()
+            bringGallery()
+        }
+
+        val update: View = view.findViewById(R.id.update)
+        update.setOnClickListener {
+            bringGallery()
         }
     }
 
-    private fun Gallery(){
+    private fun bringGallery(){
         //get all images
         imageRecycler= view?.findViewById(R.id.image_recycler)
         progressBar=view?.findViewById(R.id.recycler_progress)
@@ -133,6 +120,7 @@ class SecondFragment : Fragment() {
             galleryAddPic()
         }
 
+        //bringGallery()
     }
 
     // 사진 파일을 만드는 메소드
@@ -143,7 +131,6 @@ class SecondFragment : Fragment() {
 
 
         val storageDir: File? = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
-
         return File.createTempFile(
             "JPEG_${timeStamp}_", /* prefix */
             ".jpg", /* suffix */
@@ -165,7 +152,6 @@ class SecondFragment : Fragment() {
             requireActivity().sendBroadcast(mediaScanIntent)
         }
     }
-
 
     private fun getAllImages(): ArrayList<Image>? {
         val images=ArrayList<Image>()
