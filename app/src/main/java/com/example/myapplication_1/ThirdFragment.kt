@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.pm.PackageManager.PERMISSION_GRANTED
+import androidx.appcompat.app.AppCompatActivity
 import android.location.Location
 import android.os.Bundle
 import android.os.Looper
@@ -23,6 +24,10 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import androidx.core.content.PermissionChecker.PERMISSION_GRANTED as PERMISSION_GRANTED1
+import android.content.pm.PackageManager.PERMISSION_GRANTED
+import android.widget.Toast
+
 
 
 
@@ -33,7 +38,7 @@ class ThirdFragment : Fragment(), OnMapReadyCallback {
     private val PERM_FLAG = 99
 
     private lateinit var mMap: GoogleMap
-    private lateinit var binding: ActivityMapsBinding
+//    private lateinit var binding: ActivityMapsBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,11 +53,7 @@ class ThirdFragment : Fragment(), OnMapReadyCallback {
             ActivityCompat.requestPermissions(requireContext() as Activity, permissions, PERM_FLAG)
         }
 
-        binding = ActivityMapsBinding.inflate(layoutInflater)
-//        setContentView(binding.root)
-
-//        return binding.root
-//        return (binding.root)
+//        binding = ActivityMapsBinding.inflate(layoutInflater)
         return inflater.inflate(R.layout.fragment_third, container, false)
     }
 
@@ -67,72 +68,66 @@ class ThirdFragment : Fragment(), OnMapReadyCallback {
     }
 
     fun startProcess(){
-//      val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-//        val mapFragment = getChildFragmentManager()?.findFragmentById(R.id.map) as SupportMapFragment
-//        mapFragment.getMapAsync(this)
-
-
-        // GET MAP ASYNC, 안드로이드에게 위치 정보 요청
-//        getSupportFragmentManager().findFragmentById(R.id.map).getMapAsync(this)
-
-//        val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-//        mapFragment.getMapAsync(this)
         (activity?.supportFragmentManager?.findFragmentById(R.id.map) as SupportMapFragment?)?.let {
             it.getMapAsync(this)
         }
-//        mapFragment.getMapAsync(this)
     }
 
     override fun onMapReady(googleMap: GoogleMap?) {
         if (googleMap != null) {
             mMap = googleMap
         }
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
-        setupdateLocationListener()
+        val sydney = LatLng(-34.0, 151.0)
+        mMap.addMarker(MarkerOptions().position(sydney).title("here"))
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+
+
+//        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
+//        setupdateLocationListener()
     }
-    lateinit var fusedLocationClient: FusedLocationProviderClient
-    lateinit var locationCallback: LocationCallback
+//    lateinit var fusedLocationClient: FusedLocationProviderClient
+//    lateinit var locationCallback: LocationCallback
 
-    @SuppressLint("MissingPermission")
-    fun setupdateLocationListener(){
-        val locationRequest = LocationRequest.create()
-        locationRequest.run{
-            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-            interval = 1000
-        }
-
-        locationCallback = object : LocationCallback () {
-            override fun onLocationResult(locationResult: LocationResult?) {
-                locationResult?.let{
-                    for ((i, location) in it.locations.withIndex()){
-                        Log.d("location", "$i ${location.latitude}, ${location.longitude}")
-                        setLastLocation(location)
-                    }
-
-                }
-
-            }
-        }
-
-        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper())
-    }
-
-    fun setLastLocation(location: Location){
-        val myLocation = LatLng(location.latitude, location.longitude)
-        val marker = MarkerOptions()
-            .position(myLocation)
-            .title("You are here!")
-        val cameraOption = CameraPosition.Builder()
-            .target(myLocation)
-            .zoom(15.0f)
-            .build()
-        val camera = CameraUpdateFactory.newCameraPosition(cameraOption)
-
-        mMap.clear()
-
-        mMap.addMarker(marker)
-        mMap.moveCamera(camera)
-    }
+//    @SuppressLint("MissingPermission")
+//    fun setupdateLocationListener(){
+//        val locationRequest = LocationRequest.create()
+//        locationRequest.run{
+//            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+//            interval = 1000
+//        }
+//
+//        locationCallback = object : LocationCallback () {
+//            override fun onLocationResult(locationResult: LocationResult?) {
+//                locationResult?.let{
+//                    for ((i, location) in it.locations.withIndex()){
+//                        Log.d("location", "$i ${location.latitude}, ${location.longitude}")
+//                        setLastLocation(location)
+//                    }
+//
+//                }
+//
+//            }
+//        }
+//
+//        fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.myLooper())
+//    }
+//
+//    fun setLastLocation(location: Location){
+//        val myLocation = LatLng(location.latitude, location.longitude)
+//        val marker = MarkerOptions()
+//            .position(myLocation)
+//            .title("You are here!")
+//        val cameraOption = CameraPosition.Builder()
+//            .target(myLocation)
+//            .zoom(15.0f)
+//            .build()
+//        val camera = CameraUpdateFactory.newCameraPosition(cameraOption)
+//
+//        mMap.clear()
+//
+//        mMap.addMarker(marker)
+//        mMap.moveCamera(camera)
+//    }
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -160,3 +155,6 @@ class ThirdFragment : Fragment(), OnMapReadyCallback {
         }
     }
 }
+
+
+
