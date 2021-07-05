@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import android.widget.ListView
 import android.widget.SimpleCursorAdapter
 import androidx.fragment.app.Fragment
-import com.example.myapplication_1.databinding.ActivityMainBinding
 
   class FirstFragment : Fragment() {
 
@@ -58,13 +57,15 @@ import com.example.myapplication_1.databinding.ActivityMainBinding
             }
         }
 
-//        //누르면 전화걸기
-//        listview.setOnItemClickListener { parent, view, position, id ->
-//            var intent = Intent(Intent.ACTION_CALL)
-//            intent.data = Uri.parse("tel:${cursor?.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))}")
-//            if(intent.resolveActivity(requireActivity().packageManager) != null){
-//                startActivity(intent)
-//            }
-//        }
+        //길게 누르면
+        listview.setOnItemLongClickListener { parent, view, position, id ->
+            var intent = Intent(Intent.ACTION_CALL)
+            intent.data = Uri.parse("tel:${cursor?.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))}")
+            if(intent.resolveActivity(requireActivity().packageManager) != null){
+                startActivity(intent)
+            }
+            true
+        }
+
     }
 }
