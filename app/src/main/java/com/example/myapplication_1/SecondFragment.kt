@@ -37,6 +37,8 @@ class SecondFragment : Fragment() {
     private lateinit var currentPhotoPath: String
 
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -54,7 +56,7 @@ class SecondFragment : Fragment() {
         val fab: View = view.findViewById(R.id.fab)
         fab.setOnClickListener {
             takePictureIntent()
-            bringGallery()
+            //bringGallery()
         }
 
         val update: View = view.findViewById(R.id.update)
@@ -63,7 +65,7 @@ class SecondFragment : Fragment() {
         }
     }
 
-    private fun bringGallery(){
+    fun bringGallery(){
         //get all images
         imageRecycler= view?.findViewById(R.id.image_recycler)
         progressBar=view?.findViewById(R.id.recycler_progress)
@@ -101,7 +103,7 @@ class SecondFragment : Fragment() {
                 photoFile?.also {
                     val photoURI: Uri = FileProvider.getUriForFile(
                         requireContext(),
-                        "com.example.myapplication_1",
+                        "com.example.myapplication_1.provider",
                         it
                     )
 
@@ -153,13 +155,15 @@ class SecondFragment : Fragment() {
         }
     }
 
-    private fun getAllImages(): ArrayList<Image>? {
+    fun getAllImages(): ArrayList<Image>? {
         val images=ArrayList<Image>()
 
         //access to app file
         val allImageUri=MediaStore.Images.Media.EXTERNAL_CONTENT_URI
         val projection = arrayOf(MediaStore.Images.ImageColumns.DATA,MediaStore.Images.Media.DISPLAY_NAME)
-        var cursor=requireActivity().contentResolver.query(allImageUri,projection,null,null,null)
+
+        var cursor =
+                requireActivity().contentResolver.query(allImageUri, projection, null, null, null)
 
         //images에 불러온 image 추가
         try{
