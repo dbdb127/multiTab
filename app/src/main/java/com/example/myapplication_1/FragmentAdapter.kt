@@ -22,5 +22,4 @@ class FragmentAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle): F
         }
         return fragment
     }
-
 }
