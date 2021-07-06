@@ -38,16 +38,13 @@ Gallery(카메라 앨범)
 ## Tab3 - Map
 
 Map(지도)
-```
-TBD
-```
-
-### 테스트는 이런 식으로 작성하시면 됩니다
+* Google Maps API를 활용하여 지도 구현
+* 지도 내에서 해당 지점 클릭시 클릭 지점 좌표로 이동
+* 일정 반경내의 주변 건물을 확인 할 수 있게끔 원 형태로 3km 내의 반경표시
+ 
+### ScreenShots
 
 ```
 예시
 ```
 
-## Deployment / 배포
-
-Add additional notes about how to deploy this on a live system / 라이브 시스템을 배포하는 방법
