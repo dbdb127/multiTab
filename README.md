@@ -2,9 +2,9 @@
 
 3개의 탭에서 각각 연락처, 갤러리, 지도 기능을 동작하는 안드로이드 애플리케이션
 
-## Team Mates / 김경하 최지호
+## Team Mates : 김경하 최지호
 
-### Main Tabs / Navigation Bar
+## Main Tabs / Navigation Bar
 
 * ViewPager2를 이용하여 TabLayout을 갖는 3개의 탭을 생성
 * TabLayout에는 아이콘을 추가하여 탭의 기능을 한눈에 알아볼 수 있도록 하였으며
