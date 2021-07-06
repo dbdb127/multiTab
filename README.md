@@ -12,7 +12,7 @@
 
 ## Tab1 - Contacts
 
-Contact(연락처)
+## Contact(연락처)
 
 * SimpleCursorAdapter를 사용하여 기기의 저장소에서 연락처를 불러와 ListView에 데이터를 출력하여 이름과 전화번호를 보여주도록 하였으며
 * 짧게 터치시 다이얼에 번호를 자동 입력
