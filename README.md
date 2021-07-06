@@ -18,7 +18,7 @@ Contact(연락처)
 * 짧게 터치시 다이얼에 번호를 자동 입력
 * 길게 터치시 바로 전화 연결 기능
 
-### Tab2 - Gallary
+## Tab2 - Gallary
 
 Gallery(카메라 앨범)
 
@@ -35,7 +35,7 @@ Gallery(카메라 앨범)
 * 사진 삭제는 지금까지 삭제한 파일의 경로를 기억하는 deletedFile ArrayList를 통해 구현함.
 * 만일 불러오려는 파일의 경로가 deletedFile에 있다면 갤러리에 사진을 표시하지 않음.
 
-### Tab3 - Map
+## Tab3 - Map
 
 Map(지도)
 ```
