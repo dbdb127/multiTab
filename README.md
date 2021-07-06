@@ -17,6 +17,8 @@
 * 길게 터치시 바로 전화 연결 기능
 * 이름 또는 전화번호로 검색 가능
 
+<img src="https://user-images.githubusercontent.com/72987121/124554806-542f7880-de71-11eb-8bf7-25e8db5d0410.jpg" width=30% height=30%>
+
 ## Tab2 - Gallary (카메라 앨범)
 
 * cursor를 사용하여 기기의 사진들을 불러왔으며 recyclerView에 출력
@@ -30,16 +32,17 @@
 * 사진 삭제는 지금까지 삭제한 파일의 경로를 기억하는 deletedFile ArrayList를 통해 구현함.
 * 만일 불러오려는 파일의 경로가 deletedFile에 있다면 갤러리에 사진을 표시하지 않음.
 
+<img src="https://user-images.githubusercontent.com/72987121/124553309-8b048f00-de6f-11eb-83b1-5ae54ec70d52.jpg" width=30% height=30%>
+
+
 ## Tab3 - Map (지도)
 
 * Google Maps API를 활용하여 지도 구현
 * 지도 내에서 해당 지점 클릭시 클릭 지점 좌표로 이동
 * 일정 반경내의 주변 건물을 확인 할 수 있게끔 원 형태로 일정거리 이내의 반경표시
 * <del> GPS를 기반으로 현재 위치 정보를 받는 기능도 구현하였으나 클릭 지점 좌표 이동 기능과 충돌하여 현재 보류중 </del>
- 
-### ScreenShots
 
-```
-예시
-```
+
+<img src="https://user-images.githubusercontent.com/72987121/124554819-5691d280-de71-11eb-8ddf-f99766685a27.jpg" width=30% height=30%>
+ 
 
