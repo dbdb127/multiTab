@@ -36,15 +36,15 @@ class ThirdFragment : Fragment() {
             googleMap.setOnMapClickListener { latLng ->
                 val markerOptions = MarkerOptions()
                 markerOptions.position(latLng)
-//                googleMap.clear()
+                googleMap.clear()
 //                googleMap.addMarker()
                 googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12.0f))
                 googleMap.addMarker(markerOptions)
                 googleMap.addCircle(CircleOptions()
                     .center(latLng)
-                    .radius(1000.0)
+                    .radius(3000.0)
                     .strokeColor(Color.rgb(64,167,255))
-                    .fillColor(Color.rgb(255,216,216))
+                    .fillColor(Color.rgb(254,189,189))
                 )
             }
         }
