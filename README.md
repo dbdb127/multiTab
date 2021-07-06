@@ -6,11 +6,9 @@
 
 ### Multi-Tabs
 
-```
 * ViewPager2를 이용하여 TabLayout을 갖는 3개의 탭을 생성
 * TabLayout에는 아이콘을 추가하여 탭의 기능을 한눈에 알아볼 수 있도록 하였으며
 * action bar는 제거하고 status bar와 전체적인 앱 색상을 임의적으로 설정
-```
 
 ### Tab1 - Contacts
 
