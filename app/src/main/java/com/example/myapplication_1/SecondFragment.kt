@@ -112,21 +112,21 @@ class SecondFragment : Fragment() {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
+        override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+            super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == REQUEST_TAKE_PHOTO && resultCode == AppCompatActivity.RESULT_OK) {
-            galleryAddPic()
+            if (requestCode == REQUEST_TAKE_PHOTO && resultCode == AppCompatActivity.RESULT_OK) {
+                galleryAddPic()
+            }
+
+            //bringGallery()
         }
 
-        //bringGallery()
-    }
-
-    // 사진 파일을 만드는 메소드
-    @Throws(IOException::class)
-    private fun createImageFile(): File {
-        // Create an image file name
-        val timeStamp: String = java.text.SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        // 사진 파일을 만드는 메소드
+        @Throws(IOException::class)
+        private fun createImageFile(): File {
+            // Create an image file name
+            val timeStamp: String = java.text.SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
 
 
         val storageDir: File? = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
