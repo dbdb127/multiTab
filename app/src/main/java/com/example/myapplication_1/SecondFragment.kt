@@ -36,9 +36,6 @@ class SecondFragment : Fragment() {
     private val REQUEST_TAKE_PHOTO = 1
     private lateinit var currentPhotoPath: String
 
-
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -56,7 +53,7 @@ class SecondFragment : Fragment() {
         val fab: View = view.findViewById(R.id.fab)
         fab.setOnClickListener {
             takePictureIntent()
-            //bringGallery()
+            bringGallery()
         }
 
         val update: View = view.findViewById(R.id.update)
@@ -162,21 +159,40 @@ class SecondFragment : Fragment() {
         val allImageUri=MediaStore.Images.Media.EXTERNAL_CONTENT_URI
         val projection = arrayOf(MediaStore.Images.ImageColumns.DATA,MediaStore.Images.Media.DISPLAY_NAME)
 
-        var cursor =
+        if (activity != null) {
+            var cursor =
                 requireActivity().contentResolver.query(allImageUri, projection, null, null, null)
 
-        //images에 불러온 image 추가
-        try{
-            cursor!!.moveToFirst()
-            do{
-                val image=Image()
-                image.imagePath=cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA))
-                image.imageName=cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DISPLAY_NAME))
-                images.add(image)
-            }while(cursor.moveToNext())
-            cursor.close()
-        }catch(e:Exception){
-            e.printStackTrace()
+            //images에 불러온 image 추가
+            try {
+                cursor!!.moveToFirst()
+                do {
+                    val image = Image()
+                    image.imagePath =
+                        cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA))
+                    image.imageName =
+                        cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DISPLAY_NAME))
+
+
+                    //만약 deletedFile이 있다면 해당 파일이 삭제되었는지 확인
+                    var valid = 1
+                    if(deletedFile.isEmpty() != true) {
+                        for (i in deletedFile!!) {
+                            if (image.imagePath == i) {
+                                valid=0
+                                break
+                            }
+                        }
+                    }
+
+                    if(valid == 1) {
+                        images.add(image)
+                    }
+                } while (cursor.moveToNext())
+                cursor.close()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
         }
         return images
     }

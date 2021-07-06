@@ -28,6 +28,7 @@ class ImageAdapter(private var context:Context,private var imagesList:ArrayList<
         }
     }
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.row_custom_recycler_item,parent,false)
@@ -43,8 +44,6 @@ class ImageAdapter(private var context:Context,private var imagesList:ArrayList<
 
         //짧게 클릭하면 사진 크게 보여주기
         holder.image?.setOnClickListener {
-            Log.d("kyung", "${currentImage.imageName}")
-            Log.d("kyung", "${currentImage.imagePath}")
             val intent = Intent(context, ImageFullActivity::class.java)
             intent.putExtra("path", currentImage.imagePath)
             intent.putExtra("name", currentImage.imageName)
@@ -58,9 +57,8 @@ class ImageAdapter(private var context:Context,private var imagesList:ArrayList<
             builder.setMessage("Do you want to delete the file?")
             builder.setPositiveButton("Yes") { dialogInterface: DialogInterface, i: Int ->
                 //사진 파일 삭제
-                Log.d("kyung", "${currentImage.imageName}")
-                Log.d("kyung", "${currentImage.imagePath}")
                 var file = File("${currentImage.imagePath}")
+                com.example.myapplication_1.deletedFile.add("${currentImage.imagePath}")
                 file.delete()
 
                 SecondFragment().bringGallery()
