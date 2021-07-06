@@ -10,17 +10,13 @@
 * TabLayout에는 아이콘을 추가하여 탭의 기능을 한눈에 알아볼 수 있도록 하였으며
 * action bar는 제거하고 status bar와 전체적인 앱 색상을 임의적으로 설정
 
-## Tab1 - Contacts
-
-## Contact(연락처)
+## Tab1 - Contacts (연락처)
 
 * SimpleCursorAdapter를 사용하여 기기의 저장소에서 연락처를 불러와 ListView에 데이터를 출력하여 이름과 전화번호를 보여주도록 하였으며
 * 짧게 터치시 다이얼에 번호를 자동 입력
 * 길게 터치시 바로 전화 연결 기능
 
-## Tab2 - Gallary
-
-Gallery(카메라 앨범)
+## Tab2 - Gallary (카메라 앨범)
 
 * cursor를 사용하여 기기의 사진들을 불러왔으며 recyclerView에 출력
 * 사진을 클릭하면 해당 사진을 확대해서 보여주고, 파일명을 보여주도록 구현
@@ -35,9 +31,8 @@ Gallery(카메라 앨범)
 * 사진 삭제는 지금까지 삭제한 파일의 경로를 기억하는 deletedFile ArrayList를 통해 구현함.
 * 만일 불러오려는 파일의 경로가 deletedFile에 있다면 갤러리에 사진을 표시하지 않음.
 
-## Tab3 - Map
+## Tab3 - Map (지도)
 
-Map(지도)
 * Google Maps API를 활용하여 지도 구현
 * 지도 내에서 해당 지점 클릭시 클릭 지점 좌표로 이동
 * 일정 반경내의 주변 건물을 확인 할 수 있게끔 원 형태로 3km 내의 반경표시
