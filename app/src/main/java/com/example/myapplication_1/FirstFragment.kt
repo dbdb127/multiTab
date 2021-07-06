@@ -1,16 +1,21 @@
   package com.example.myapplication_1
 
+import android.app.Activity
 import android.content.Intent
 import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
 import android.provider.ContactsContract
+import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ListView
-import android.widget.SimpleCursorAdapter
+import android.widget.*
 import androidx.fragment.app.Fragment
+import com.example.myapplication_1.databinding.ActivityMainBinding
+import java.lang.Exception
+import java.lang.reflect.Constructor
 
   class FirstFragment : Fragment() {
 
@@ -23,7 +28,6 @@ import androidx.fragment.app.Fragment
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         super.onViewCreated(view, savedInstanceState)
 
         var cursor: Cursor? = requireActivity().contentResolver.query(
@@ -35,23 +39,57 @@ import androidx.fragment.app.Fragment
         )
         activity?.startManagingCursor(cursor)
 
-        var from = arrayOf(
-            ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
-            ContactsContract.CommonDataKinds.Phone.NUMBER,
-            ContactsContract.CommonDataKinds.Phone._ID
-        )
-        print(from)
-        var to = intArrayOf(android.R.id.text1, android.R.id.text2)
+        var data = ArrayList<Person>()
+        var name = ArrayList<String>()
+        var number = ArrayList<String>()
+        try {
+            cursor!!.moveToFirst()
+            do {
+                name.add(cursor?.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)))
+                number.add(cursor?.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)))
+            } while (cursor.moveToNext())
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
 
-        var simple: SimpleCursorAdapter =
-            SimpleCursorAdapter(activity, android.R.layout.simple_list_item_2, cursor, from, to)
+        for(i in name.indices){
+            val person = Person(name[i], number[i])
+            data.add(person)
+        }
+
         val listview = view?.findViewById(R.id.listView) as ListView
-        listview.setAdapter(simple)
+        listview.adapter = ContactAdapter(context as Activity, data)
+
+
+        //검색
+        val searchView = view?.findViewById<SearchView>(R.id.searchView)
+        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                var tmp = ArrayList<Person>()
+                for(i in data.indices){
+                    if(data[i].toString().contains("${query}")==true)
+                        tmp.add(data[i])
+                }
+                listview.adapter = ContactAdapter(context as Activity, tmp)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                var tmp = ArrayList<Person>()
+                for(i in data.indices){
+                    if(data[i].toString().contains("${newText}")==true)
+                        tmp.add(data[i])
+                }
+                listview.adapter = ContactAdapter(context as Activity, tmp)
+                return true
+            }
+        })
+
 
         //누르면 다이얼에
         listview.setOnItemClickListener { parent, view, position, id ->
             var intent = Intent(Intent.ACTION_DIAL)
-            intent.data = Uri.parse("tel:${cursor?.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))}")
+            intent.data = Uri.parse("tel:${number[position]}")
             if(intent.resolveActivity(requireActivity().packageManager) != null){
                 startActivity(intent)
             }
@@ -60,7 +98,7 @@ import androidx.fragment.app.Fragment
         //길게 누르면
         listview.setOnItemLongClickListener { parent, view, position, id ->
             var intent = Intent(Intent.ACTION_CALL)
-            intent.data = Uri.parse("tel:${cursor?.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))}")
+            intent.data = Uri.parse("tel:${number[position]}")
             if(intent.resolveActivity(requireActivity().packageManager) != null){
                 startActivity(intent)
             }

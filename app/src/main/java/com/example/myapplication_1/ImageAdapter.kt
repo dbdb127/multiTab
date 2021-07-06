@@ -61,6 +61,9 @@ class ImageAdapter(private var context:Context,private var imagesList:ArrayList<
                 com.example.myapplication_1.deletedFile.add("${currentImage.imagePath}")
                 file.delete()
 
+                var toast = Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT)
+                toast.show()
+
                 SecondFragment().bringGallery()
             }
             builder.setNegativeButton("No") { dialogInterface: DialogInterface, i: Int ->
