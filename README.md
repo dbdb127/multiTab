@@ -1,4 +1,4 @@
-# Project Title / MultiTabs
+# Project Title / Blue Tabs
 
 3개의 탭에서 각각 연락처, 갤러리, 지도 기능을 동작하는 안드로이드 애플리케이션
 
