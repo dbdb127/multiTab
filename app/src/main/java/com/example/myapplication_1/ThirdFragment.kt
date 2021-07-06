@@ -1,7 +1,7 @@
 package com.example.myapplication_1
 
 import android.Manifest
-import android.content.pm.PackageManager.PERMISSION_GRANTED
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,8 +10,9 @@ import androidx.fragment.app.Fragment
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.Circle
+import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
@@ -35,9 +36,16 @@ class ThirdFragment : Fragment() {
             googleMap.setOnMapClickListener { latLng ->
                 val markerOptions = MarkerOptions()
                 markerOptions.position(latLng)
-                googleMap.clear()
-                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10f))
+//                googleMap.clear()
+//                googleMap.addMarker()
+                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 12.0f))
                 googleMap.addMarker(markerOptions)
+                googleMap.addCircle(CircleOptions()
+                    .center(latLng)
+                    .radius(1000.0)
+                    .strokeColor(Color.rgb(64,167,255))
+                    .fillColor(Color.rgb(255,216,216))
+                )
             }
         }
         return view
