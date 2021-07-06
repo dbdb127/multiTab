@@ -4,7 +4,7 @@
 
 ## Team Mates / 김경하 최지호
 
-### Multi-Tabs
+### Main Tabs / Navigation Bar
 
 * ViewPager2를 이용하여 TabLayout을 갖는 3개의 탭을 생성
 * TabLayout에는 아이콘을 추가하여 탭의 기능을 한눈에 알아볼 수 있도록 하였으며
@@ -14,12 +14,9 @@
 
 Contact(연락처)
 
-```
-SimpleCursorAdapter를 사용하여 기기의 연락처를 불러와 ListView에 데이터를 출력
-이름과 전화번호를 보여주도록 하였으며
-짧게 터치하면 다이얼에 번호를 입력하도록,
-길게 터치하면 바로 전화를 걸 수 있도록 구현
-```
+* SimpleCursorAdapter를 사용하여 기기의 저장소에서 연락처를 불러와 ListView에 데이터를 출력하여 이름과 전화번호를 보여주도록 하였으며
+* 짧게 터치시 다이얼에 번호를 자동 입력
+* 길게 터치시 바로 전화 연결 기능
 
 ### Tab2 - Gallary
 
