@@ -1,10 +1,8 @@
 # Project Title / MultiTabs
 
-## Team Mates / 김경하 최지호
-
-## Brief Introduction
-
 3개의 탭에서 각각 연락처, 갤러리, 지도 기능을 동작하는 안드로이드 애플리케이션
+
+## Team Mates / 김경하 최지호
 
 ### Multi-Tabs
 
