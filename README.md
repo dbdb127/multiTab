@@ -21,21 +21,19 @@ Contact(연락처)
 ### Tab2 - Gallary
 
 Gallery(카메라 앨범)
-```
-cursor를 사용하여 기기의 사진들을 불러왔으며 recyclerView에 출력
-사진을 클릭하면 하나의 사진만을 확대해서 보여주며 사진 위에 사진 이름을 보여주도록 구현
-오픈소스를 사용하여 확대된 사진에서 줌 인, 줌 아웃 기능을 구현하였으며 
-최대로 줌 아웃하거나 두 번 터치할 시 사진 크기가 원래대로 돌아감
-Floating Action Button을 추가하여 카메라 아이콘을 클릭할 시 카메라가 켜지도록 하였으며
-촬영 후에는 Pictures파일에 찍은 사진이 저장됨
-새로고침 Floating Action Button을 누르면 앨범이 갱신됨
-AlertDialog를 사용하여 사진을 길게 누르면 삭제 문구가 뜨도록 하였으며
-Yes를 누르면 "Deleted" Toast 문구가 뜨면서 사진이 삭제됨.
-이 때에도 역시 새로고침 Floating Action Button을 누르면 갤러리가 갱신됨
 
-사진 삭제는 지금까지 삭제한 파일의 경로를 기억하는 deletedFile ArrayList를 통해 구현함.
-만일 불러오려는 파일의 경로가 deletedFile에 있다면 갤러리에 사진을 표시하지 않음.
-```
+* cursor를 사용하여 기기의 사진들을 불러왔으며 recyclerView에 출력
+* 사진을 클릭하면 해당 사진을 확대해서 보여주고, 파일명을 보여주도록 구현
+* 확대된 사진에서 줌 인, 줌 아웃 기능을 구현
+* 최대로 줌 아웃하거나 두 번 터치할 시 사진 크기가 원래대로 돌아감
+* Floating Action Button을 추가하여 카메라 아이콘을 클릭할 시 카메라가 켜지도록 하였으며 촬영 후에는 Pictures파일에 찍은 사진이 저장됨
+* 새로고침 Floating Action Button을 누르면 앨범이 갱신됨
+* AlertDialog를 사용하여 사진을 길게 누르면 삭제 문구가 뜨도록 하였으며
+* Yes를 누르면 "Deleted" Toast 문구가 뜨면서 사진이 삭제됨.
+* 이 때에도 역시 새로고침 Floating Action Button을 누르면 갤러리가 갱신됨
+
+* 사진 삭제는 지금까지 삭제한 파일의 경로를 기억하는 deletedFile ArrayList를 통해 구현함.
+* 만일 불러오려는 파일의 경로가 deletedFile에 있다면 갤러리에 사진을 표시하지 않음.
 
 ### Tab3 - Map
 
